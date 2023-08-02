@@ -11,7 +11,7 @@ services:
       - ./db-data/:/var/lib/postgresql/data/
   
   web:
-    build: /app
+    build: .
     command: uvicorn app.main:app --host 0.0.0.0 --reload
     volumes:
       - .:/app
