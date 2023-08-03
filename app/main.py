@@ -59,11 +59,11 @@ def create(url: schemas.URLToShorten, db: Session = Depends(get_db)):
     return shortened_url
 
 
-@app.get("/{key}", status_code=301)
+@app.get("/{key}")
 def redirect(key: str, db: Session = Depends(get_db)):
     shortened_url = crud.get_original_url(db, key)
 
     if shortened_url is None:
         raise HTTPException(status_code=404, detail="URL is not found.")
     
-    return RedirectResponse(shortened_url.original_url)
+    return RedirectResponse(shortened_url.original_url, status_code=301)
