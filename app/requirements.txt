@@ -2,3 +2,4 @@ fastapi[all]
 sqlalchemy
 validators
 psycopg2
+gunicorn
