@@ -31,7 +31,12 @@ app.add_middleware(
 KEY_LEN = 6
 
 
-@app.post("/urls", response_model=schemas.ShortenedURL)
+@app.get("/")
+def home():
+    return RedirectResponse(url="https://www.krll.me", status_code=301)
+
+
+@app.post("/api/urls", response_model=schemas.ShortenedURL)
 def create(url: schemas.URLToShorten, db: Session = Depends(get_db)):
     if not validators.url(url.url):
         raise HTTPException(status_code=400, detail="Invalid URL")
